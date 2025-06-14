@@ -9,3 +9,19 @@ The app includes two main features:
   with a timestamp.
 
 Built with **React**, **TypeScript**, and **Vite**.
+
+## Getting Started
+
+To run this project locally:
+
+**Clone the repository:**  
+`git clone https://github.com/vitalijmirnyj/react-ts-miniapp.git`  
+`cd react-ts-miniapp`
+
+**Install dependencies:**  
+`npm install`
+
+**Start the development server:**  
+`npm run dev`
+
+The app will typically be available at http://localhost:5173 by default.
