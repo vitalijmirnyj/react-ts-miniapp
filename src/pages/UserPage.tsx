@@ -140,7 +140,11 @@ function UserPage() {
       <div style={{ marginTop: '30px', display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
         <input type="text" placeholder="Vardas" name="name" value={newUser.name} onChange={handleChange} style={inputStyle} />
         <input type="text" placeholder="Pareigos" name="position" value={newUser.position} onChange={handleChange} style={inputStyle} />
-        <input type="text" placeholder="Lytis" name="gender" value={newUser.gender} onChange={handleChange} style={inputStyle} />
+        <select name="gender" value={newUser.gender} onChange={handleChange} style={inputStyle}>
+          <option value="">Pasirinkite lytį</option>
+          <option value="Vyras">Vyras</option>
+          <option value="Moteris">Moteris</option>
+        </select>
         <input type="text" placeholder="Amžius" name="age" value={newUser.age} onChange={handleChange} style={inputStyle} />
         <button onClick={handleAdd} style={addButtonStyle}>Pridėti</button>
       </div>
