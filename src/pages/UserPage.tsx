@@ -25,6 +25,7 @@ function UserPage({ users, setUsers }: Props) {
 
   const [sortField, setSortField] = useState<SortField>('name');
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
+  const [error, setError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -32,10 +33,14 @@ function UserPage({ users, setUsers }: Props) {
   };
 
   const handleAdd = () => {
-    if (newUser.name && newUser.position && newUser.gender && newUser.age) {
-      setUsers([...users, newUser]);
-      setNewUser({ name: '', position: '', gender: '', age: '' });
+    if (!newUser.name || !newUser.position || !newUser.gender || !newUser.age) {
+      setError('Prašome užpildyti visus laukus.');
+      return;
     }
+
+    setUsers([...users, newUser]);
+    setNewUser({ name: '', position: '', gender: '', age: '' });
+    setError('');
   };
 
   const handleDelete = (index: number) => {
@@ -136,24 +141,51 @@ function UserPage({ users, setUsers }: Props) {
         </tbody>
       </table>
 
-     <form
-       onSubmit={(e) => {
-         e.preventDefault();
-         handleAdd();
-       }}
-       style={{ marginTop: '30px', display: 'flex', gap: '10px', flexWrap: 'wrap' }}
-     >
-       <input type="text" placeholder="Vardas" name="name" value={newUser.name} onChange={handleChange} style={inputStyle} />
-       <input type="text" placeholder="Pareigos" name="position" value={newUser.position} onChange={handleChange} style={inputStyle} />
-       <select name="gender" value={newUser.gender} onChange={handleChange} style={inputStyle}>
-         <option value="">Pasirinkite lytį</option>
-         <option value="Vyras">Vyras</option>
-         <option value="Moteris">Moteris</option>
-       </select>
-       <input type="text" placeholder="Amžius" name="age" value={newUser.age} onChange={handleChange} style={inputStyle} />
-       <button type="submit" style={addButtonStyle}>Pridėti</button>
-     </form>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleAdd();
+        }}
+        style={{ marginTop: '30px', display: 'flex', gap: '10px', flexWrap: 'wrap' }}
+      >
+        <input
+          type="text"
+          placeholder="Vardas"
+          name="name"
+          value={newUser.name}
+          onChange={handleChange}
+          style={{ ...inputStyle, borderColor: error && !newUser.name ? 'red' : '#ccc' }}
+        />
+        <input
+          type="text"
+          placeholder="Pareigos"
+          name="position"
+          value={newUser.position}
+          onChange={handleChange}
+          style={{ ...inputStyle, borderColor: error && !newUser.position ? 'red' : '#ccc' }}
+        />
+        <select
+          name="gender"
+          value={newUser.gender}
+          onChange={handleChange}
+          style={{ ...inputStyle, borderColor: error && !newUser.gender ? 'red' : '#ccc' }}
+        >
+          <option value="">Pasirinkite lytį</option>
+          <option value="Vyras">Vyras</option>
+          <option value="Moteris">Moteris</option>
+        </select>
+        <input
+          type="text"
+          placeholder="Amžius"
+          name="age"
+          value={newUser.age}
+          onChange={handleChange}
+          style={{ ...inputStyle, borderColor: error && !newUser.age ? 'red' : '#ccc' }}
+        />
+        <button type="submit" style={addButtonStyle}>Pridėti</button>
+      </form>
 
+      {error && <div style={{ color: 'red', marginTop: '10px' }}>{error}</div>}
     </div>
   );
 }
