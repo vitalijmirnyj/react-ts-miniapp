@@ -1,9 +1,23 @@
 import './App.css';
 import { Routes, Route, NavLink } from 'react-router-dom';
+import { useState } from 'react';
 import UserPage from './pages/UserPage';
 import JokePage from './pages/JokePage';
 
+type User = {
+  name: string;
+  position: string;
+  gender: string;
+  age: string;
+};
+
 function App() {
+  const [users, setUsers] = useState<User[]>([
+    { name: 'Jonas', position: 'Programuotojas', gender: 'Vyras', age: '28' },
+    { name: 'Asta', position: 'Vadovė', gender: 'Moteris', age: '34' },
+    { name: 'Ona', position: 'Analitikė', gender: 'Moteris', age: '45' }
+  ]);
+
   return (
     <>
       <nav
@@ -31,9 +45,9 @@ function App() {
       </nav>
 
       <Routes>
-        <Route path="/users" element={<UserPage />} />
+        <Route path="/users" element={<UserPage users={users} setUsers={setUsers} />} />
         <Route path="/jokes" element={<JokePage />} />
-        <Route path="*" element={<UserPage />} />
+        <Route path="*" element={<UserPage users={users} setUsers={setUsers} />} />
       </Routes>
     </>
   );

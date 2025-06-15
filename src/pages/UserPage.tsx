@@ -10,13 +10,12 @@ type User = {
 type SortField = keyof User;
 type SortDirection = 'asc' | 'desc';
 
-function UserPage() {
-  const [users, setUsers] = useState<User[]>([
-    { name: 'Jonas', position: 'Programuotojas', gender: 'Vyras', age: '28' },
-    { name: 'Asta', position: 'Vadovė', gender: 'Moteris', age: '34' },
-    { name: 'Ona', position: 'Analitikė', gender: 'Moteris', age: '45' }
-  ]);
+type Props = {
+  users: User[];
+  setUsers: React.Dispatch<React.SetStateAction<User[]>>;
+};
 
+function UserPage({ users, setUsers }: Props) {
   const [newUser, setNewUser] = useState<User>({
     name: '',
     position: '',
@@ -27,7 +26,7 @@ function UserPage() {
   const [sortField, setSortField] = useState<SortField>('name');
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setNewUser({ ...newUser, [name]: value });
   };
