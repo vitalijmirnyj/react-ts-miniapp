@@ -25,3 +25,29 @@ To run this project locally:
 `npm run dev`
 
 The app will typically be available at http://localhost:5173 by default.
+
+## Testing
+
+Tests are written using **Vitest** and **React Testing Library**.
+
+**To run tests:**  
+`npx vitest`
+
+**To run in watch mode:**  
+`npx vitest --watch`
+
+### Tested features
+
+- Rendering existing users in the table
+- Showing error message if form is submitted with empty fields
+- Adding a user when form fields are filled correctly
+
+**Install test dependencies (if missing):**  
+`npm install --save-dev vitest @testing-library/react @testing-library/jest-dom @testing-library/user-event jsdom`
+
+Global setup is in:  
+`src/setupTests.ts`
+
+Test config is in:  
+`vite.config.ts`
+`vite.config.ts`
